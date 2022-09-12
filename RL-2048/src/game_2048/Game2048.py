@@ -9,6 +9,8 @@ class Game2048:
 
         self.board = [[0 for i in range(self.board_width)] for j in range(self.board_height)]
         self.score = 0
+
+        # TODO: Add an ability for arbitrary starting tiles count
         self.add_tile()
         self.add_tile()
 
@@ -55,9 +57,35 @@ class Game2048:
         self.board[tile[0]][tile[1]] = tile_value
 
 
+    def move(self, direction: str) -> None:
+        """
+        Moves the board in the given direction
+
+        Args:
+            direction (str): direction to move the board in
+        """
+        # 1. Check possible move directions and throw exception if the given direction is not possible
+        if direction not in ["up", "down", "left", "right"]:
+            raise Exception("Invalid direction")
+
+        
+
+
+        # 2. Move the board
+        {
+            "up": self.move_up,
+            "down": self.move_down,
+            "left": self.move_left,
+            "right": self.move_right
+        }[direction]()
+
+        # 2. Add a new tile
+        self.add_tile()
+
+
 if __name__ == '__main__':
 
-    game = Game2048(3,3)
+    game = Game2048(2,2)
     print(game.board)
     try:
         while True:
